@@ -25,7 +25,6 @@
         </encoder>
     </appender>
 
-    <logger name="ru.tcsbank" level="DEBUG"/>
     <logger name="akka" level="DEBUG"/>
 
     <root level="WARN">
