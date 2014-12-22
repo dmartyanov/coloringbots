@@ -10,12 +10,12 @@ class Manager extends Actor {
 
   override def receive: Receive = LoggingReceive {
     case Start(bs, n, m) =>
-      context.actorOf(Props(new Arena(bs, n, m, iterationNo)))
+      context.actorOf(Props(new SerialArena(bs, n, m, iterationNo)))
     case Finish(wn, ls) =>
-      println(s"Winner's color [${wn}}]")
-      println(s"[${ls.mkString(" ")}] lose")
+      println(s"Winner's color [${wn._1}] with time [${wn._2}]")
+      println(s"[${ls.map(_._1).mkString(" ")}] loseb with times [${ls.map(_._2).mkString(" ")}]")
   }
 }
 
 case class Start(bots: Map[ActorRef, Int], n: Int, m: Int)
-case class Finish(winner: Int, loosers: List[Int])
+case class Finish(winner: (Int, Long), loosers: List[(Int, Long)])
